@@ -1,0 +1,15 @@
+1. izi69system/admin/izi69_main.php
+   - Added Set Email Video Transaction (Email Video Link and Message)
+   - Added Send Package Funds (Send Members Funds based on the selected Package)
+   
+2. izi69system/admin/izi69_setvideoemail.php
+  - Post Email Video Link and Message and save to database
+
+3. izi69system/authentication/izi69_registration.php
+  - Added the Email Video Link and Message to the registration
+
+4. izi69system/admin/izi69_sendpackgefundsconfirmation.php
+  - Post Package+Funds and update members external wallet balance in the database
+
+5. izi69system/admin/izi69_izi69_transferfunds.php
+  - Post Transfer Funds from stock wallet to external wallet balance in the database
