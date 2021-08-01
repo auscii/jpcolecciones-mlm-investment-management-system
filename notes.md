@@ -17,7 +17,8 @@ https://www.jpcolecciones.com/account/admin/
 username: admin@admin.com
 password: admin
 --------------------------------------------
-MODIFICATIONS:
+MODIFICATIONS (Remaining balance 18K):
 • Add delete button beside Activation button on Member Activation
 • Add delete button also for Member Wallet Geneology page (https://www.jpcolecciones.com/account/admin)
+• Video tutorial
 --------------------------------------------

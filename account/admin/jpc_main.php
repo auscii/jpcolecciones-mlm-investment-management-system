@@ -505,7 +505,7 @@
                     <th>ID (POP)</th>
                     <th>Invoice (POP)</th>
                     <th>Status</th>
-                    <th>Actions</th>
+                    <th class="text-center">Actions</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -553,6 +553,9 @@
                       <td><?php echo $activatemembers_activationstatus ?></td>
                       <td><button type="button" class="btn btn-info showActivateMembers" data-toggle="modal" data-target="#jpc_ActivateMembersConfirmation" data-activatemembers="<?php echo $MemberInfoValue ; ?>">
                         Activation
+                      </button></td>
+                      <td><button type="button" class="btn btn-danger showActivateMembers" data-toggle="modal" data-target="#jpc_ActivateMembersConfirmation" data-activatemembers="<?php echo $MemberInfoValue ; ?>">
+                        Delete
                       </button></td>
                     </tr>
                   <?php $xid++; }; ?>
