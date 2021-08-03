@@ -485,26 +485,21 @@
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Member Activation <strong>(Total Active Members = <font color=green><?php echo $totalactivemembers ; ?></font> Total Inactive Members = <font color=red><?php echo $totalinactivemembers ; ?></font>)</strong></h3>
-              <div class="box-tools pull-right">
-                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <div class="table-responsive">
-              <table class="table no-margin">
+              <table class="table">
                   <thead>
                   <tr>
-                    <th>No.</th>
-                    <th>Photo</th>
-                    <th>Member ID</th>
-                    <th>Member Name</th>
-                    <th>Membership Plan</th>
-                    <th>ID (POP)</th>
-                    <th>Invoice (POP)</th>
-                    <th>Status</th>
+                    <th class="text-center">No.</th>
+                    <th class="text-center">Photo</th>
+                    <th class="text-center">Member ID</th>
+                    <th class="text-center">Member Name</th>
+                    <th class="text-center">Membership Plan</th>
+                    <th class="text-center">ID (POP)</th>
+                    <th class="text-center">Invoice (POP)</th>
+                    <th class="text-center">Status</th>
                     <th class="text-center">Actions</th>
                   </tr>
                   </thead>
@@ -543,20 +538,17 @@
                                          $rows["i_isactive"]  ;
                     ?>
                     <tr>
-                      <td><?php echo $xid ?></td>
-                      <td><img src="<?php echo '../images/photos/' . $activatemembers_thumbnailphoto ; ?>" width="60px" height="60px" class="img-circle" alt="Member Photo"></td>
-                      <td><?php echo $rows["i_memberid"]; ?></td>
-                      <td><?php echo $rows["i_firstname"] . " " . $rows["i_middlename"] . " " . $rows["i_lastname"]; ?></td>
-                      <td><?php echo $rows["i_membershipplan"]; ?></td>
-                      <td><img src="<?php echo '../images/photos/' . $activatemembers_profilephoto ; ?>" width="60px" height="60px" class="img-circle" alt="ID Proof of Payment"></td>
-                      <td><img src="<?php echo '../images/photos/' . $activatemembers_invoicephoto ; ?>" width="60px" height="60px" class="img-circle" alt="Invoice Proof of Payment"></td>
-                      <td><?php echo $activatemembers_activationstatus ?></td>
-                      <td><button type="button" class="btn btn-info showActivateMembers" data-toggle="modal" data-target="#jpc_ActivateMembersConfirmation" data-activatemembers="<?php echo $MemberInfoValue ; ?>">
-                        Activation
+                      <td class="text-center"><?php echo $xid ?></td>
+                      <td class="text-center"><img src="<?php echo '../images/photos/' . $activatemembers_thumbnailphoto ; ?>" width="60px" height="60px" class="img-circle" alt="Member Photo"></td>
+                      <td class="text-center"><?php echo $rows["i_memberid"]; ?></td>
+                      <td class="text-center"><?php echo $rows["i_firstname"] . " " . $rows["i_middlename"] . " " . $rows["i_lastname"]; ?></td>
+                      <td class="text-center"><?php echo $rows["i_membershipplan"]; ?></td>
+                      <td class="text-center"><img src="<?php echo '../images/photos/' . $activatemembers_profilephoto ; ?>" width="60px" height="60px" class="img-circle" alt="ID Proof of Payment"></td>
+                      <td class="text-center"><img src="<?php echo '../images/photos/' . $activatemembers_invoicephoto ; ?>" width="60px" height="60px" class="img-circle" alt="Invoice Proof of Payment"></td>
+                      <td class="text-center"><?php echo $activatemembers_activationstatus ?></td>
+                      <td class="text-center"><button type="button" class="btn btn-info showActivateMembers" data-toggle="modal" data-target="#jpc_ActivateMembersConfirmation" data-activatemembers="<?php echo $MemberInfoValue ; ?>"><i class="fa fa-check-square"></i> Activate
                       </button></td>
-                      <td><button type="button" class="btn btn-danger showActivateMembers" data-toggle="modal" data-target="#jpc_ActivateMembersConfirmation" data-activatemembers="<?php echo $MemberInfoValue ; ?>">
-                        Delete
-                      </button></td>
+                      <td><button type="button" class="btn btn-danger showDeleteMember" data-toggle="modal" data-target="#jpc_DeleteMemberConfirmation" data-deletemember="<?php echo $MemberInfoValue ; ?>"><i class="fa fa-trash"></i> Delete</button></td>
                     </tr>
                   <?php $xid++; }; ?>
                   </tbody>
@@ -586,6 +578,7 @@
       </div>
       <!-- /.row (main row) -->
        <!-- /.row (main row) -->
+       
       <div class="modal modal-success fade" id="jpc_ActivateMembersConfirmation" name="jpc_ActivateMembersConfirmation">
           <div class="modal-dialog">
               <div class="modal-content">
@@ -605,7 +598,6 @@
                             <div id="jpc_activatemembers_membername" name="jpc_activatemembers_membername"></div>
                             <div id="jpc_activatemembers_created" name="jpc_activatemembers_created"></div>
                             <div id="jpc_activatemembers_activationstatus" name="jpc_activatemembers_activationstatus"></div>
-
                           </td>
                           <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                           <td>
@@ -626,16 +618,28 @@
                       <td><button type="button" class="btn btn-outline" data-dismiss="modal">Cancel</button></td>
                     </tr>
                   </table>
-
-
-
                 </div>
             </div>
-            <!-- /.modal-content -->
           </div>
-          <!-- /.modal-dialog -->
       </div>
-      <!-- /.modal -->
+
+      <div class="modal modal-danger fade" id="jpc_DeleteMemberConfirmation" name="jpc_DeleteMemberConfirmation">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title">Are you sure you want to Delete this user - <span id="member_name"></span></h4>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group text-center">
+                    <button type="button" class="btn btn-outline" id="jpc_deletememberbutton"><i class="fa fa-check-circle"></i> Yes</button> &nbsp;
+                    <button type="button" class="btn btn-outline" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
 
       <!-- Main row -->
       <div id="jpc_MemberGeneaology" name="jpc_MemberGeneaology" class="row" style="display: none">
@@ -685,16 +689,16 @@
                 <table class="table no-margin">
                   <thead>
                   <tr>
-                    <th>No.</th>
-                    <th>Join <br>Date/Time</th>
-                    <th>Member <br>Name</th>
-                    <th>Member ID</th>
-                    <th>Level</th>
-                    <th>Upline <br>Name</th>
-                    <th>Upline <br>ID</th>
-                    <th>Pay <br>Amount (<?php echo $currencysettings_currencyprefix ; ?>)</th>
-                    <th>Commission <br>Amount (<?php echo $currencysettings_currencyprefix ; ?>)</th>
-                    <th>Processing<br>Status</th>
+                    <th class="text-center">No.</th>
+                    <th class="text-center">Join <br>Date/Time</th>
+                    <th class="text-center">Member <br>Name</th>
+                    <th class="text-center">Member ID</th>
+                    <th class="text-center">Level</th>
+                    <th class="text-center">Upline <br>Name</th>
+                    <th class="text-center">Upline <br>ID</th>
+                    <th class="text-center">Pay <br>Amount (<?php echo $currencysettings_currencyprefix ; ?>)</th>
+                    <th class="text-center">Commission <br>Amount (<?php echo $currencysettings_currencyprefix ; ?>)</th>
+                    <th class="text-center">Processing<br>Status</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -907,14 +911,14 @@
                 <table class="table no-margin">
                   <thead>
                   <tr>
-                    <th>No.</th>
-                    <th>Date</th>
-                    <th>Member Name/ID</th>
-                    <th>Withdrawable<br>Balance (<?php echo $currencysettings_currencyprefix ; ?>)</th>
-                    <th>Withdraw Amount (<?php echo $currencysettings_currencyprefix ; ?>)</th>
-                    <th>Reason</th>
-                    <th>Transfer Name/ID</th>
-                    <th>Actions</th>
+                    <th class="text-center">No.</th>
+                    <th class="text-center">Date</th>
+                    <th class="text-center">Member Name/ID</th>
+                    <th class="text-center">Withdrawable<br>Balance (<?php echo $currencysettings_currencyprefix ; ?>)</th>
+                    <th class="text-center">Withdraw Amount (<?php echo $currencysettings_currencyprefix ; ?>)</th>
+                    <th class="text-center">Reason</th>
+                    <th class="text-center">Transfer Name/ID</th>
+                    <th class="text-center">Actions</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -1271,14 +1275,14 @@
                 <table class="table no-margin">
                     <thead>
                     <tr>
-                      <th>No.</th>
-                      <th>Photo</th>
-                      <th>Member ID</th>
-                      <th>Member Name</th>
-                      <th>Membership Plan</th>
-                      <th>Stock Wallet Balance</th>
-                      <th>External Wallet Balance</th>
-                      <th>Actions</th>
+                      <th class="text-center">No.</th>
+                      <th class="text-center">Photo</th>
+                      <th class="text-center">Member ID</th>
+                      <th class="text-center">Member Name</th>
+                      <th class="text-center">Membership Plan</th>
+                      <th class="text-center">Stock Wallet Balance</th>
+                      <th class="text-center">External Wallet Balance</th>
+                      <th class="text-center">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -1550,21 +1554,21 @@
                 <table class="table no-margin">
                   <thead>
                   <tr>
-                    <th>Membership Plan</th>
-                    <th>Level 1 (%)</th>
-                    <th>Level 2 (%)</th>
-                    <th>Level 3 (%)</th>
-                    <th>Level 4 (%)</th>
-                    <th>Level 5 (%)</th>
-                    <th>Level 6 (%)</th>
-                    <th>Level 7 (%)</th>
-                    <th>Level 8 (%)</th>
-                    <th>Level 9 (%)</th>
-                    <th>Level 10 (%)</th>
-                    <th>Investment Amount</th>
-                    <th>Stock Bonus Share</th>
-                    <th>Special Bonus</th>
-                    <th>Actions</th>
+                    <th class="text-center">Membership Plan</th>
+                    <th class="text-center">Level 1 (%)</th>
+                    <th class="text-center">Level 2 (%)</th>
+                    <th class="text-center">Level 3 (%)</th>
+                    <th class="text-center">Level 4 (%)</th>
+                    <th class="text-center">Level 5 (%)</th>
+                    <th class="text-center">Level 6 (%)</th>
+                    <th class="text-center">Level 7 (%)</th>
+                    <th class="text-center">Level 8 (%)</th>
+                    <th class="text-center">Level 9 (%)</th>
+                    <th class="text-center">Level 10 (%)</th>
+                    <th class="text-center">Investment Amount</th>
+                    <th class="text-center">Stock Bonus Share</th>
+                    <th class="text-center">Special Bonus</th>
+                    <th class="text-center">Actions</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -2171,6 +2175,24 @@
         }
     });
   });
+  $('.showDeleteMember').each(function () {
+    var $this = $(this);
+    $this.on("click", function () {
+        var data = $(this).data('deletemember') ;
+        var arr = data.split('~') ;
+        var status = "" ;
+        $("#jpc_activatemembers_id").val(arr[0]) ;
+        $("#member_name").html(arr[3]) ;
+    });
+  });
+  $("#jpc_deletememberbutton").click(function() { AdminDeleteMember(); });
+  function AdminDeleteMember() {
+    var id = $("#jpc_activatemembers_id").val() ;
+    $('#jpc_DeleteMemberConfirmation').modal('hide');
+    setTimeout(function() {
+      document.location.href = vrjpcValidationSettings_Server + 'admin/jpc_deletemembers.php?jpc_deletemembers_id=' + id ;
+    }, 1000);
+  }
   $("#jpc_activatemembersbutton").click(function() { AdminActivateMembers(); });
   function AdminActivateMembers() {
     var id = $("#jpc_activatemembers_id").val() ;
