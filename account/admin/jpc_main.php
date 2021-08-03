@@ -547,7 +547,7 @@
                       <td class="text-center"><?php echo $activatemembers_activationstatus ?></td>
                       <td class="text-center"><button type="button" class="btn btn-info showActivateMembers" data-toggle="modal" data-target="#jpc_ActivateMembersConfirmation" data-activatemembers="<?php echo $MemberInfoValue ; ?>"><i class="fa fa-check-square"></i> Activate
                       </button></td>
-                      <td><button type="button" class="btn btn-danger showDeleteMember" data-toggle="modal" data-target="#jpc_DeleteMemberConfirmation" data-deletemember="<?php echo $MemberInfoValue ; ?>"><i class="fa fa-trash"></i> Delete</button></td>
+                      <td class="text-center"><button type="button" class="btn btn-danger showDeleteMember" data-toggle="modal" data-target="#jpc_DeleteMemberConfirmation" data-deletemember="<?php echo $MemberInfoValue ; ?>"><i class="fa fa-trash"></i> Delete</button></td>
                     </tr>
                   <?php $xid++; }; ?>
                   </tbody>
@@ -626,13 +626,31 @@
           <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span></button>
-                  <h4 class="modal-title">Are you sure you want to Delete this user - <span id="member_name"></span></h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <input type="hidden" id="jpc_activatemembers_id" name="jpc_activatemembers_id">
+                  <h4 class="modal-title">Are you sure you want to Delete this user - <span id="member_name"></span>?</h4>
                 </div>
                 <div class="modal-body">
                   <div class="form-group text-center">
                     <button type="button" class="btn btn-outline" id="jpc_deletememberbutton"><i class="fa fa-check-circle"></i> Yes</button> &nbsp;
+                    <button type="button" class="btn btn-outline" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
+
+      <div class="modal modal-danger fade" id="jpc_DeleteMemberGeneaologyConfirmation" name="jpc_DeleteMemberGeneaologyConfirmation">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <input type="hidden" id="jpc_activatemembers_id" name="jpc_activatemembers_id">
+                  <h4 class="modal-title">Are you sure you want to Delete?</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="form-group text-center">
+                    <button type="button" class="btn btn-outline" id="jpc_deletemembergeneaologybutton"><i class="fa fa-check-circle"></i> Yes</button> &nbsp;
                     <button type="button" class="btn btn-outline" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
                   </div>
                 </div>
@@ -698,27 +716,30 @@
                     <th class="text-center">Pay <br>Amount (<?php echo $currencysettings_currencyprefix ; ?>)</th>
                     <th class="text-center">Commission <br>Amount (<?php echo $currencysettings_currencyprefix ; ?>)</th>
                     <th class="text-center">Processing<br>Status</th>
+                    <th class="text-center">Action</th>
                   </tr>
                   </thead>
                   <tbody>
                     <?php while ($rows=mysqli_fetch_array($sqlviewallgeneaology)) { ?>
                     <tr>
-                      <td><?php echo $rows["i_id"]; ?></td>
-                      <td><?php echo $rows["join_date"]; ?></td>
-                      <td><?php echo $rows["i_firstname"] . " " . $rows["i_middlename"] . " " . $rows["i_lastname"] ; ?></td>
-                      <td><?php echo $rows["i_memberid"]; ?></td>
-                      <td><?php echo $rows["i_level"]; ?></td>
-                      <td><?php echo $rows["uplinename"] ; ?></td>
-                      <td><?php echo $rows["i_uplineid"] ; ?></td>
-                      <td><?php echo $rows["i_investmentamount"]; ?></td>
-                      <td><?php echo $rows["i_commission"]; ?></td>
-                      <td><?php
+                      <td class="text-center"><?php echo $rows["i_id"]; ?></td>
+                      <td class="text-center"><?php echo $rows["join_date"]; ?></td>
+                      <td class="text-center"><?php echo $rows["i_firstname"] . " " . $rows["i_middlename"] . " " . $rows["i_lastname"] ; ?></td>
+                      <td class="text-center"><?php echo $rows["i_memberid"]; ?></td>
+                      <td class="text-center"><?php echo $rows["i_level"]; ?></td>
+                      <td class="text-center"><?php echo $rows["uplinename"] ; ?></td>
+                      <td class="text-center"><?php echo $rows["i_uplineid"] ; ?></td>
+                      <td class="text-center"><?php echo $rows["i_investmentamount"]; ?></td>
+                      <td class="text-center"><?php echo $rows["i_commission"]; ?></td>
+                      <td class="text-center"><?php
                             if ($rows["i_paidstatus"]==0) {
                               $paidstatus = "Pending" ;
                             } else {
                               $paidstatus = "Processed" ;
                             }
-                           echo $paidstatus ?></td>
+                           echo $paidstatus ?>
+                      </td>
+                      <td class="text-center"><button type="button" class="btn btn-danger showDeleteMemberGeneaology" data-toggle="modal" data-target="#jpc_DeleteMemberGeneaologyConfirmation" data-deletemembergenealogyid="<?php echo $rows['i_id'] ; ?>"><i class="fa fa-trash"></i> Delete</button></td>
                     </tr>
                   <?php }; ?>
                   </tbody>
@@ -2181,6 +2202,21 @@
         $("#member_name").html(arr[3]) ;
     });
   });
+  $('.showDeleteMemberGeneaology').each(function () {
+    var $this = $(this);
+    $this.on("click", function () {
+        var id = $(this).data('deletemembergenealogyid') ;
+        $("#jpc_activatemembers_id").val(id) ;
+    });
+  });
+  $("#jpc_deletemembergeneaologybutton").click(function() { AdminDeleteMemberGeneaology(); });
+  function AdminDeleteMemberGeneaology(id) {
+    var id = $("#jpc_activatemembers_id").val() ;
+    $('#jpc_DeleteMemberGeneaologyConfirmation').modal('hide');
+    setTimeout(function() {
+      document.location.href = vrjpcValidationSettings_Server + 'admin/jpc_deletemembergenealogy.php?jpc_deletemembers_id=' + id ;
+    }, 1000);
+  }
   $("#jpc_deletememberbutton").click(function() { AdminDeleteMember(); });
   function AdminDeleteMember() {
     var id = $("#jpc_activatemembers_id").val() ;
