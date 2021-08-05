@@ -1,9 +1,6 @@
 <?php
-  //date_default_timezone_set('Asia/Hong_Kong');
   date_default_timezone_set('Asia/Manila');
-
-   include "../include/jpc_common.php" ;
-
+  include "../include/jpc_common.php" ;
   ob_start();
   @session_start();
 
@@ -211,6 +208,7 @@
   <link rel="stylesheet" href="../bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <link rel="stylesheet" href="../bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <link rel="stylesheet" href="../plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+  <link rel="stylesheet" href="../bower_components/custom.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-green sidebar-mini fixed">
@@ -447,9 +445,10 @@
       <div id="jpc_ActivateMembers" name="jpc_ActivateMembers" class="row" style="display: none">
           <div class="box box-info">
             <div class="box-header with-border">
-              <h3 class="box-title">Member Activation <strong>(Total Active Members = <font color=green><?php echo $totalactivemembers ; ?></font> Total Inactive Members = <font color=red><?php echo $totalinactivemembers ; ?></font>)</strong></h3>
+              <h3 class="box-title">Member Activation <strong>(Total Active Members = <font color="green"><?php echo $totalactivemembers ; ?></font> Total Inactive Members = <font color="red"><?php echo $totalinactivemembers ; ?></font>)</strong></h3>
             </div>
             <!-- /.box-header -->
+            <!-- <button class="btn btn-success" id="btn_refresh"><i class="fa fa-refresh"></i> REFRESH</button> -->
             <div class="box-body">
               <div class="table-responsive">
               <table class="table">
@@ -1739,7 +1738,7 @@
 <script src="../dist/js/pages/dashboard.js"></script>
 <script src="../plugins/Charts.js"></script>
 <script type="text/javascript">
-
+  var refreshStatus = "";
   jQuery(function(){
     <?php
       $january = 0 ;
@@ -1891,9 +1890,8 @@
 <script src="../dist/js/demo.js"></script>
 
 <script type="text/javascript">
-
+  let dashboardMain = "DashboardMain", memberActivation = "MemberActivation", memberWalletGenealogy = "MemberWalletGenealogy", payoutWithdrawalApproval = "PayoutWithdrawalApproval", transferFunds = "TransferFunds", commissionRates = "CommissionRates";
   var vrjpcValidationSettings_Server = "<?php echo $serverdirectory ; ?>";
-
   var StartModule = "<?php echo $jpc_startmodule ; ?>";
   var SearchMember = "<?php echo $jpc_searchmember ; ?>" ;
   if (StartModule=="activatemember" || SearchMember!="") {
@@ -1905,6 +1903,7 @@
   }
 
   function LoadDashboard() {
+    refreshStatus = dashboardMain;
     $("#jpc_AdministratorDashboard").html() ;
     $("#jpc_DashboardWidget").show();
     $("#jpc_ActivateMembers").hide();
@@ -1921,6 +1920,7 @@
   }
 
   function LoadActivateMembers() {
+    refreshStatus = memberActivation;
     $("#jpc_AdministratorDashboard").html("Member Activation") ;
     $("#jpc_DashboardWidget").hide();
     $("#jpc_ActivateMembers").show();
@@ -1937,6 +1937,7 @@
   }
 
   function LoadMemberGeneaology() {
+    refreshStatus = memberWalletGenealogy;
     $("#jpc_AdministratorDashboard").html("Member Wallet Genealogy") ;
     $("#jpc_DashboardWidget").hide();
     $("#jpc_ActivateMembers").hide();
@@ -1953,6 +1954,7 @@
   }
 
   function LoadPayoutApproval() {
+    refreshStatus = payoutWithdrawalApproval;
     $("#jpc_AdministratorDashboard").html("Payout Withdrawal Approval") ;
     $("#jpc_DashboardWidget").hide();
     $("#jpc_ActivateMembers").hide();
@@ -1985,6 +1987,7 @@
   }
 
   function LoadTransferFunds() {
+    refreshStatus = transferFunds;
     $("#jpc_AdministratorDashboard").html("Transfer Funds") ;
     $("#jpc_DashboardWidget").hide();
     $("#jpc_ActivateMembers").hide();
@@ -2001,6 +2004,7 @@
   }
 
   function LoadCommissionRates() {
+    refreshStatus = commissionRates;
     $("#jpc_AdministratorDashboard").html("Commission Rates") ;
     $("#jpc_DashboardWidget").hide();
     $("#jpc_ActivateMembers").hide();
@@ -2522,15 +2526,35 @@
        document.location.href = vrjpcValidationSettings_Server + 'admin/jpc_transferfunds.php?jpc_transferfunds_id=' + id + '&jpc_transferfunds_amount=' + amount ;
      }, 1000);
   }
-
   function LoadLogout() {
     setTimeout(function() {document.location.href = 'index.php'}, 1000);
   }
-
   function AlertMessage(xMessage) {
     $('#jpc_alertmessage').html(xMessage);
     $('#jpc_Alert').modal('show');
   }
+  /*
+  function GetRefresh() {
+
+  }
+  $('#btn_refresh').click(function() {
+    if (refreshStatus == memberActivation) {
+      // setTimeout(function() {
+      //   LoadActivateMembers();
+      //   console.log('loadActivateMembers') ;
+      // }, 3000);
+      window.location.href = 'jpc_main.php?memberActivation=2';
+    } else if (refreshStatus = memberWalletGenealogy) {
+      // LoadMemberGeneaology();
+    } else if (refreshStatus = payoutWithdrawalApproval) {
+      // LoadPayoutApproval();
+    } else if (refreshStatus = transferFunds) {
+      // LoadTransferFunds();
+    } else if (refreshStatus = commissionRates) {
+      // LoadCommissionRates();
+    }
+  }) ;
+  */
 </script>
 
 </body>
