@@ -75,11 +75,8 @@ if ($image->check($_POST['captcha_code']) == true) {
 		var register = "<?php echo $register ; ?>" ;
 		var testURL = "<?php echo $testURL ; ?>" ;
 		if (status==1) {
-			console.log('success registration!');
-			console.log('vrjpcValidationSettings_Server -> ', vrjpcValidationSettings_Server);
 			document.location.href = testURL + 'authentication/jpc_registration.php?membershipplan=' + membershipplan + '&firstname=' + firstname + '&lastname=' + lastname + '&middlename=' + middlename + '&sponsorid=' + sponsorid + '&email=' + email + '&password=' + password ;
 		} else {
-			console.log('failed registration!');
 			alert('Incorrect captcha. Please try again.');
 			setTimeout(function() {
 				document.location.href = register;

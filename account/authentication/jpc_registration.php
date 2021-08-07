@@ -1,6 +1,3 @@
-<script type="text/javascript">
-console.log('REDIRECTED JPC_REGISTRATION');
-</script>
 <?php
 	include "../include/jpc_common.php" ;
 	ob_start();
@@ -89,22 +86,11 @@ console.log('REDIRECTED JPC_REGISTRATION');
 	$memberid3 = $memberid ;
 	$memberid4 = $memberid ;	
 
-	// echo "membershipplan -> " . $membershipplan . "\n" ;
-	
-	// echo "fullname ->" . $firstname . " " . $middlename . " " . $lastname . "\n" ;
-	
-	// echo "sponsorid ->" . $sponsorid . "\n" ;
-	
-	// echo "email ->" . $email . "\n" ;
-	
-	// echo "password ->" . $password . "\n" ;
-
-	// exit();
-
-	$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM jpc_members WHERE i_email='$email' AND i_password='$password'");
+	$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM jpc_members WHERE i_email='$email'");
 	$row = mysqli_fetch_array($result);
 	if ($row) {
-		header('Location:'.$serverdirectory);
+		echo "<script>alert('User email address exists. Please try another email address.'); document.location.href='". $serverdirectory ."'</script>" ;
+		// header('Location:'.$serverdirectory);
 		exit();
 	} else {
 		$sqlcommissionrates = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM jpc_commissionrates WHERE i_membershipplan = '$membershipplan' ");
@@ -302,12 +288,12 @@ console.log('REDIRECTED JPC_REGISTRATION');
 		$sql=mysqli_query($GLOBALS["___mysqli_ston"], "UPDATE jpc_members SET i_verificationcode = '$memberverification' WHERE i_email='$email'");
 
 		$video_link = "" ;
-	  $video_message = "" ;
-	  $sqlemailvideo = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM jpc_settings LIMIT 1");
-	  while ($rows=mysqli_fetch_array($sqlemailvideo)) {
-	    $video_link = $rows['i_emailvideolink'] ;
-	    $video_message = $rows['i_emailvideomessage'] ;
-	  }
+		$video_message = "" ;
+		$sqlemailvideo = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM jpc_settings LIMIT 1");
+		while ($rows=mysqli_fetch_array($sqlemailvideo)) {
+			$video_link = $rows['i_emailvideolink'] ;
+			$video_message = $rows['i_emailvideomessage'] ;
+		}
 
 		$emailaddress = $email;
 		$your_website = $serverdirectory ;
