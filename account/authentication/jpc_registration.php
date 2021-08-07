@@ -1,10 +1,10 @@
+<script type="text/javascript">
+console.log('REDIRECTED JPC_REGISTRATION');
+</script>
 <?php
 	include "../include/jpc_common.php" ;
-
 	ob_start();
 	@session_start();
-
-	//date_default_timezone_set('Asia/Hong_Kong');
 	date_default_timezone_set('Asia/Manila');
 
 	if (isset($_GET["membershipplan"])) {
@@ -51,6 +51,7 @@
 		$password = "";
 	}
 
+/* VALIDATION IF USER EXISTS
 	$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM jpc_members WHERE i_memberid = '$sponsorid'");
 	$row = mysqli_fetch_array($result);
 	if (!$row) {
@@ -64,6 +65,7 @@
 		header('Location:'.$serverdirectory);
 		exit();
 	}
+*/
 
 	$level1percentage = 0 ;
 	$level2percentage = 0 ;
@@ -85,7 +87,19 @@
 	$memberid1 = $memberid ;
 	$memberid2 = $memberid ;
 	$memberid3 = $memberid ;
-	$memberid4 = $memberid ;
+	$memberid4 = $memberid ;	
+
+	// echo "membershipplan -> " . $membershipplan . "\n" ;
+	
+	// echo "fullname ->" . $firstname . " " . $middlename . " " . $lastname . "\n" ;
+	
+	// echo "sponsorid ->" . $sponsorid . "\n" ;
+	
+	// echo "email ->" . $email . "\n" ;
+	
+	// echo "password ->" . $password . "\n" ;
+
+	// exit();
 
 	$result = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM jpc_members WHERE i_email='$email' AND i_password='$password'");
 	$row = mysqli_fetch_array($result);

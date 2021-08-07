@@ -4,6 +4,8 @@ $az1n1 = "299187122" ;
 $az1n2 = "3fxfC1230" ;
 $serverdirectory="http://localhost/jpcolecciones/account/" ;
 $serveremail="support@jpcolecciones.com" ;
+$register="jpc_register.php" ;
+$testURL = "https://jpcolecciones.com/dev-test/account/" ;
 
 $host="localhost"; // Host name 
 $username="root"; // Mysql username 
