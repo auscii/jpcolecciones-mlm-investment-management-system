@@ -263,7 +263,7 @@
           </a>
         </li>
 
-        <li class="treeview">
+        <!-- <li class="treeview">
           <a href="#" onclick="LoadSendPackageFunds();">
             <i class="fa fa-money"></i> <span>Send Package Funds</span>
           </a>
@@ -273,7 +273,7 @@
           <a href="#" onclick="LoadTransferFunds();">
             <i class="fa fa-refresh"></i> <span>Transfer Funds</span>
           </a>
-        </li>
+        </li> -->
 
         <li class="treeview">
           <a href="#" onclick="LoadCommissionRates();">
