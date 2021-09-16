@@ -24,6 +24,8 @@ MODIFICATIONS (Remaining balance 18K):
 • Remove the X icon to hide container pages in Member maintenance page
 • Update to readonly the sponsor id on referral.php
 • Video tutorial
+• Remove transfer funds and send package funds - DONE
+• Update Commision Rates (Admin), need to add button and fields are: New members name, Upline User ID Number, 
 --------------------------------------------
 COMMON
 <?php

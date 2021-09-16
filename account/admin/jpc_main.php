@@ -365,6 +365,82 @@
       </div>
       <!-- /.modal -->
 
+      <div class="modal modal-primary fade" id="jpc_modal_commision_rates" name="jpc_modal_commision_rates">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">NEW COMMISSION RATES</h4>
+                </div>
+                  <div class="modal-body">
+                    <form id="jpc_formcommissionrates" class="form-horizontal" action="" method="post">
+                      <div class="box-body">
+                        <div class="form-group">
+                          <label for="jpc_members_name" class="col-sm-2 control-label">Member's Name</label>
+                          <div class="col-sm-10">
+                            <select class="form-control" name="jpc_members_name" id="jpc_members_name">
+                                <option value="Members name 1">Members name 1</option>
+                                <option value="Members name 2">Members name 2</option>
+                                <?php
+                                  //echo "<option value='" . $package1 . "'>Package 1</option>" ;
+                                  //echo "<option value='" . $package2 . "'>Package 2</option>" ;
+                                ?>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="jpc_userid_number" class="col-sm-2 control-label">Upline User ID Number</label>
+                          <div class="col-sm-10">
+                            <!-- <input type="text" class="form-control" id="jpc_" name="jpc_" value="<?php //echo $currencysettings_currencysymbol ; ?>"> -->
+                            <input type="text" class="form-control" id="jpc_userid_number" name="jpc_userid_number">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="jpc_item_description" class="col-sm-2 control-label">Item Description</label>
+                          <div class="col-sm-10">
+                            <input type="text" class="form-control" id="jpc_item_description" name="jpc_item_description">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="jpc_item_price" class="col-sm-2 control-label">Item Price</label>
+                          <div class="col-sm-10">
+                            <input type="number" class="form-control" id="jpc_item_price" name="jpc_item_price">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="jpc_referral_fee" class="col-sm-2 control-label">Referral Fee</label>
+                          <div class="col-sm-10">
+                            <input type="number" class="form-control" id="jpc_referral_fee" name="jpc_referral_fee">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="jpc_commission_fee" class="col-sm-2 control-label">Commission Fee</label>
+                          <div class="col-sm-10">
+                            <input type="number" class="form-control" id="jpc_commission_fee" name="jpc_commission_fee">
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="jpc_level_number" class="col-sm-2 control-label">Level #</label>
+                          <div class="col-sm-10">
+                            <!-- <input type="text" class="form-control" id="jpc_" name="jpc_" value="<?php //echo $currencysettings_currencysymbol ; ?>"> -->
+                            <input type="text" class="form-control" id="jpc_level_number" name="jpc_level_number">
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-success" id="jpc_btn_submit_commission_rates"><i class="fa fa-check-circle"></i> Submit</button>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
+
       <div id="jpc_DashboardWidget" name="jpc_DashboardWidget" class="row">
         <div class="col-md-3 col-sm-6 col-xs-12">
           <div class="info-box">
@@ -1518,6 +1594,8 @@
             <!-- /.box-header -->
             <div class="box-body">
               <div class="table-responsive">
+                <button class="btn btn-primary" id="jpc_add_commision_rates"><i class="fa fa-plus-circle"></i> Add new commision rates</button>
+                <!-- 
                 <table class="table no-margin">
                   <thead>
                   <tr>
@@ -1540,6 +1618,7 @@
                   </thead>
                   <tbody>
                     <?php
+                    /*
                      $sqlcommissionrates = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT *
                                                             FROM jpc_commissionrates
                                                             ORDER BY i_membershipplan");
@@ -1559,29 +1638,31 @@
                                              $rows["i_investmentamount"] . "~" .
                                              $rows["i_stockbonusshare"] . "~" .
                                              $rows["i_specialbonus"] ;
+                      */
                     ?>
                     <tr>
-                      <td><?php echo $rows["i_membershipplan"]; ?></td>
-                      <td><?php echo $rows["i_level1percentage"]; ?></td>
-                      <td><?php echo $rows["i_level2percentage"]; ?></td>
-                      <td><?php echo $rows["i_level3percentage"]; ?></td>
-                      <td><?php echo $rows["i_level4percentage"]; ?></td>
-                      <td><?php echo $rows["i_level5percentage"]; ?></td>
-                      <td><?php echo $rows["i_level6percentage"]; ?></td>
-                      <td><?php echo $rows["i_level7percentage"]; ?></td>
-                      <td><?php echo $rows["i_level8percentage"]; ?></td>
-                      <td><?php echo $rows["i_level9percentage"]; ?></td>
-                      <td><?php echo $rows["i_level10percentage"]; ?></td>
-                      <td><?php echo $rows["i_investmentamount"]; ?></td>
-                      <td><?php echo $rows["i_stockbonusshare"]; ?></td>
-                      <td><?php echo $rows["i_specialbonus"]; ?></td>
+                      <td><?php// echo $rows["i_membershipplan"]; ?></td>
+                      <td><?php// echo $rows["i_level1percentage"]; ?></td>
+                      <td><?php// echo $rows["i_level2percentage"]; ?></td>
+                      <td><?php// echo $rows["i_level3percentage"]; ?></td>
+                      <td><?php// echo $rows["i_level4percentage"]; ?></td>
+                      <td><?php// echo $rows["i_level5percentage"]; ?></td>
+                      <td><?php// echo $rows["i_level6percentage"]; ?></td>
+                      <td><?php// echo $rows["i_level7percentage"]; ?></td>
+                      <td><?php// echo $rows["i_level8percentage"]; ?></td>
+                      <td><?php// echo $rows["i_level9percentage"]; ?></td>
+                      <td><?php// echo $rows["i_level10percentage"]; ?></td>
+                      <td><?php// echo $rows["i_investmentamount"]; ?></td>
+                      <td><?php// echo $rows["i_stockbonusshare"]; ?></td>
+                      <td><?php// echo $rows["i_specialbonus"]; ?></td>
                       <td><button type="button" class="btn btn-info showCommissionRates" data-commissionrates="<?php echo $ComissionRatesValue ; ?>"  data-toggle="modal" data-target="#jpc_EditCommissionRates">
                         Update
                       </button></td>
                     </tr>
-                  <?php }; ?>
+                  <?php //}; ?>
                   </tbody>
                 </table>
+                 -->
               </div>
 
               <!-- /.table-responsive -->
@@ -2533,6 +2614,15 @@
     $('#jpc_alertmessage').html(xMessage);
     $('#jpc_Alert').modal('show');
   }
+  $('#jpc_add_commision_rates').click(function() {
+    AlertMessage("Clicked commission rates!");
+    $('#jpc_modal_commision_rates').modal('show');
+  });
+  $('#jpc_btn_submit_commission_rates').click(function() {
+    const membersName = $('#jpc_members_name').val(), userIdNumber = $('#jpc_userid_number').val(), itemDescription = $('#jpc_item_description').val(), itemPrice = $('#jpc_item_price').val(), referralFee = $('#jpc_referral_fee').val(), commissionFee = $('#jpc_commission_fee').val(), levelNumber = $('#jpc_level_number').val(); 
+    $('#jpc_modal_commision_rates').modal('hide');
+    AlertMessage("Saved commission rates -> " + membersName + " " + userIdNumber + " " + itemDescription + " " + itemPrice + " " + referralFee + " " + commissionFee + " " + levelNumber);
+  });
   /*
   function GetRefresh() {
 
