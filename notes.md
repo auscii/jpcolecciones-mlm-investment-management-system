@@ -25,7 +25,8 @@ MODIFICATIONS (Remaining balance 18K):
 • Update to readonly the sponsor id on referral.php
 • Video tutorial
 • Remove transfer funds and send package funds - DONE
-• Update Commision Rates (Admin), need to add button and fields are: New members name, Upline User ID Number, 
+• Update Commision Rates (Admin), need to add button and fields are: New members name, Upline User ID Number, Item Description, Item Price, Referral Fee, Commision fee and Level #
+  - j_id, j_new_members_name, j_upline_user_id_number, j_item_description, j_item_price, j_referral_fee, j_commision_fee, j_level_number, j_date_time_created, j_status
 --------------------------------------------
 COMMON
 <?php

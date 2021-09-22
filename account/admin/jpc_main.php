@@ -342,7 +342,7 @@
     <!-- Main content -->
     <section class="content">
 
-      <div class="modal modal-danger fade" id="jpc_Alert" name="jpc_Alert">
+      <div class="modal modal-success fade" id="jpc_Alert" name="jpc_Alert">
           <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
@@ -368,26 +368,27 @@
       <div class="modal modal-primary fade" id="jpc_modal_commision_rates" name="jpc_modal_commision_rates">
           <div class="modal-dialog">
               <div class="modal-content">
-                <div class="modal-header">
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">NEW COMMISSION RATES</h4>
-                </div>
+                <form id="jpc_formcommissionrates" class="form-horizontal" action="" method="post">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title">NEW COMMISSION RATES</h4>
+                  </div>
                   <div class="modal-body">
-                    <form id="jpc_formcommissionrates" class="form-horizontal" action="" method="post">
                       <div class="box-body">
                         <div class="form-group">
                           <label for="jpc_members_name" class="col-sm-2 control-label">Member's Name</label>
                           <div class="col-sm-10">
                             <select class="form-control" name="jpc_members_name" id="jpc_members_name">
-                                <option value="Members name 1">Members name 1</option>
-                                <option value="Members name 2">Members name 2</option>
-                                <?php
-                                  //echo "<option value='" . $package1 . "'>Package 1</option>" ;
-                                  //echo "<option value='" . $package2 . "'>Package 2</option>" ;
-                                ?>
+                              <?php
+                              $sqlmembers = mysqli_query($GLOBALS["___mysqli_ston"], "SELECT * FROM jpc_members ORDER BY i_firstname ASC");
+                              while ($rows=mysqli_fetch_array($sqlmembers)) {
+                                $members = $rows['i_firstname'] . " " . $rows['i_middlename'] . " " . $rows['i_lastname'];
+                                echo "<option value='" . $members . "'>$members</option>" ;
+                              }
+                              ?>
                             </select>
-                          </div>
+                          </div>  
                         </div>
                         <div class="form-group">
                           <label for="jpc_userid_number" class="col-sm-2 control-label">Upline User ID Number</label>
@@ -423,17 +424,28 @@
                         <div class="form-group">
                           <label for="jpc_level_number" class="col-sm-2 control-label">Level #</label>
                           <div class="col-sm-10">
-                            <!-- <input type="text" class="form-control" id="jpc_" name="jpc_" value="<?php //echo $currencysettings_currencysymbol ; ?>"> -->
-                            <input type="text" class="form-control" id="jpc_level_number" name="jpc_level_number">
+                            <select class="form-control" name="jpc_level_plan" id="jpc_level_plan">
+                              <option value="Level 1 (%)">Level 1 (%)</option>
+                              <option value="Level 2 (%)">Level 2 (%)</option>
+                              <option value="Level 3 (%)">Level 3 (%)</option>
+                              <option value="Level 4 (%)">Level 4 (%)</option>
+                              <option value="Level 5 (%)">Level 5 (%)</option>
+                              <option value="Level 6 (%)">Level 6 (%)</option>
+                              <option value="Level 7 (%)">Level 7 (%)</option>
+                              <option value="Level 8 (%)">Level 8 (%)</option>
+                              <option value="Level 9 (%)">Level 9 (%)</option>
+                              <option value="Level 10 (%)">Level 10 (%)</option>
+                            </select> <br>
+                            <input type="number" class="form-control" id="jpc_level_number" name="jpc_level_number" placeholder="">
                           </div>
                         </div>
                       </div>
-                    </form>
                   </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-success" id="jpc_btn_submit_commission_rates"><i class="fa fa-check-circle"></i> Submit</button>
-                  <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
-                </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-success" id="jpc_btn_submit_commission_rates"><i class="fa fa-check-circle"></i> Submit</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-times"></i> Cancel</button>
+                  </div>
+                </form>
             </div>
             <!-- /.modal-content -->
           </div>
@@ -1655,7 +1667,7 @@
                       <td><?php// echo $rows["i_investmentamount"]; ?></td>
                       <td><?php// echo $rows["i_stockbonusshare"]; ?></td>
                       <td><?php// echo $rows["i_specialbonus"]; ?></td>
-                      <td><button type="button" class="btn btn-info showCommissionRates" data-commissionrates="<?php echo $ComissionRatesValue ; ?>"  data-toggle="modal" data-target="#jpc_EditCommissionRates">
+                      <td><button type="button" class="btn btn-info showCommissionRates" data-commissionrates="<?php //echo $ComissionRatesValue ; ?>"  data-toggle="modal" data-target="#jpc_EditCommissionRates">
                         Update
                       </button></td>
                     </tr>
@@ -2540,30 +2552,51 @@
   });
 
   $(document).ready(function (e) {
-        var jpc_server = vrjpcValidationSettings_Server + 'admin/jpc_changepassword.php' ;
-        $("#jpc_formchangepassword").action = jpc_server ;
-        $("#jpc_formchangepassword").on('submit',(function(e) {
-          e.preventDefault();
-          $.ajax({
-                url: jpc_server,
-            type: "POST",
-            data:  new FormData(this),
-            beforeSend: function(data)
-            {
+      var jpc_server = vrjpcValidationSettings_Server + 'admin/jpc_changepassword.php' ;
+      $("#jpc_formchangepassword").action = jpc_server ;
+      $("#jpc_formchangepassword").on('submit',(function(e) {
+        e.preventDefault();
+        $.ajax({
+              url: jpc_server,
+          type: "POST",
+          data:  new FormData(this),
+          beforeSend: function(data)
+          {},
+          contentType: false,
+          processData:false,
+          success: function(data)
+          {
+            AlertMessage("Updated Successfully!");
+          },
+          error: function()
+          {
+            AlertMessage("Updated Successfully!");
+          }
+          });
+      }));
+  });
 
-            },
-            contentType: false,
-            processData:false,
-            success: function(data)
-            {
-              AlertMessage("Updated Successfully!");
-            },
-            error: function()
-            {
-              AlertMessage("Updated Successfully!");
-            }
-           });
-        }));
+  $(document).ready(function (e) {
+    var jpc_server = vrjpcValidationSettings_Server + 'admin/jpc_newcommissionrates.php' ;
+    $("#jpc_formcommissionrates").action = jpc_server ;
+    $("#jpc_formcommissionrates").on('submit',(function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: jpc_server,
+        type: "POST",
+        data: new FormData(this),
+        beforeSend: function(data)
+        {},
+        contentType: false,
+        processData:false,
+        success: function(data) {
+          AlertMessage("Saved Successfully!");
+        },
+        error: function() {
+          AlertMessage("Unable to add commisision rates!");
+        }
+      });
+    }));
   });
 
   $("#jpc_sendpackagefundsbutton").click(function() { SendPackageConfirmation(); });
@@ -2615,17 +2648,20 @@
     $('#jpc_Alert').modal('show');
   }
   $('#jpc_add_commision_rates').click(function() {
-    AlertMessage("Clicked commission rates!");
     $('#jpc_modal_commision_rates').modal('show');
   });
   $('#jpc_btn_submit_commission_rates').click(function() {
-    const membersName = $('#jpc_members_name').val(), userIdNumber = $('#jpc_userid_number').val(), itemDescription = $('#jpc_item_description').val(), itemPrice = $('#jpc_item_price').val(), referralFee = $('#jpc_referral_fee').val(), commissionFee = $('#jpc_commission_fee').val(), levelNumber = $('#jpc_level_number').val(); 
     $('#jpc_modal_commision_rates').modal('hide');
-    AlertMessage("Saved commission rates -> " + membersName + " " + userIdNumber + " " + itemDescription + " " + itemPrice + " " + referralFee + " " + commissionFee + " " + levelNumber);
   });
-  /*
-  function GetRefresh() {
-
+  $('#jpc_level_plan').on('change', function() {
+    console.log('selection level value -> ', this.value);
+    $('#jpc_level_number').attr("placeholder", this.value + " = 0.00");
+  });
+  $('#jpc_item_price, #jpc_referral_fee, #jpc_commission_fee').on("input", function() {
+    var nonNumReg = /[^0-9]/g
+    $(this).val($(this).val().replace(nonNumReg, ''));
+  });
+  /* function GetRefresh() {
   }
   $('#btn_refresh').click(function() {
     if (refreshStatus == memberActivation) {
@@ -2643,8 +2679,7 @@
     } else if (refreshStatus = commissionRates) {
       // LoadCommissionRates();
     }
-  }) ;
-  */
+  }) ; */
 </script>
 
 </body>
